@@ -25,11 +25,12 @@ int ch1_exercise_1_9(){
     std::cout << "Enter 2 numbers:" <<std::endl;
     int v1 = 0, v2 = 0, sum = 0;
     std::cin >> v1 >> v2;
+    int v1_bak = v1;
     while(v1 <= v2){
         sum += v1;
         ++v1;
     }
-    std::cout << "Sum of" << v1 <<" to " << v2 <<" is " << sum <<std::endl;
+    std::cout << "Sum of" << v1_bak <<" to " << v2 <<" is " << sum <<std::endl;
     return 0;
 }
 
@@ -37,8 +38,9 @@ int ch1_exercise_1_10(){
     std::cout << "Enter 2 numbers:" <<std::endl;
     int v1 = 0, v2 = 0, sum = 0;
     std::cin >> v1 >> v2;
+    std::cout << "Increasing Sort" << std::endl;
     while(v1 >= v2){
-        std::cout << "Descending Sort" << v1 << " ";
+        std::cout << v1 << " ";
         --v1;
     }
     return 0;
@@ -49,14 +51,16 @@ int ch1_exercise_1_11(){
     int v1 = 0, v2 = 0, sum = 0;
     std::cin >> v1 >> v2;
     if(v1 > v2){
+        std::cout << "Increasing Sort" << std::endl;
         while(v1 >= v2){
-        std::cout << "Descending Sort" << v1 << " ";
-        --v1;
+        std::cout << v2 << " ";
+        ++v2;
         }
     }
     else if(v1 < v2){
+        std::cout << "Increasing Sort" << std::endl;
         while(v2 >= v1){
-        std::cout << "Increasing Sort" << v1 << " ";
+        std::cout  << v1 << " ";
         ++v1;
         }
 
@@ -80,9 +84,9 @@ int ch1_exercise_1_11(){
  */
 
 int main(){
-    ch1_exercise_1_9();
+    //ch1_exercise_1_9();
     //ch1_exercise_1_10();
-    //ch1_exercise_1_11();
+    ch1_exercise_1_11();
     return 0;
 
 }
