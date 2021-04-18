@@ -46,3 +46,140 @@ the differences among the literals in each of the four examples:
 - (b) 10, 10u, 10L, 10uL, 012, 0xC
 - (c) 3.14, 3.14f, 3.14L
 - (d) 10, 10u, 10., 10e-2
+
+(a): character literal, wide character literal, string literal, string wide character literal.
+
+(b): decimal, unsigned decimal, long decimal, unsigned long decimal, octal, hexadecimal.
+
+(c): double, float, long double.
+
+(d): decimal, unsigned decimal, double, double.
+
+## Exercise 2.6
+> What, if any, are the differences between the following
+definitions:
+```cpp
+int month = 9, day = 7;
+int month = 09, day = 07;
+```
+The first line's integer is decimal.
+
+The second line:
+
+1. `int month = 09` is invalid, cause octal don't have digit `9`.
+2. `day` is octal.
+
+## Exercise 2.7
+> What values do these literals represent? What type does each
+have?
+- (a) "Who goes with F\145rgus?\012"
+- (b) 3.14e1L
+- (c) 1024f
+- (d) 3.14L
+
+(a): Who goes with Fergus?(new line) "string"
+
+(b): 31.4 "long double"
+
+(c): ERROR: The suffix f is valid only with floating point literals, but 1024 is integer
+
+(d): 3.14 "long double"
+
+## Exercise 2.8
+> Using escape sequences, write a program to print 2M followed by a newline. Modify the program to print 2, then a tab, then an M, followed by a newline.
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << 2 << "\115\012";
+    std::cout << 2 << "\t\115\012";
+    return 0;
+}
+```
+## Exercise 2.9
+>Explain the following definitions. For those that are illegal, explain what’s wrong and how to correct it.
+- (a) std::cin >> int input_value;
+- (b) int i = { 3.14 };
+- (c) double salary = wage = 9999.99;
+- (d) int i = 3.14;
+
+Solution:
+(a): error: expected '(' for function-style cast or type construction.
+```cpp
+int input_value = 0;
+std::cin >> input_value;
+```
+(b):---when you compile the code without the argument "-std=c++11", you will get the warning below:
+    warning: implicit conversion from 'double' to 'int' changes value from 3.14 to 3.
+---when you compile the code using "-std=c+11", you will get a error below:
+    error: type 'double' cannot be narrowed to 'int' in initializer list
+---conclusion: Obviously, list initialization becomes strict in c++11.
+```cpp
+double i = { 3.14 };
+```
+
+(c): --if you declared 'wage' before, it's right. Otherwise, you'll get a error:
+    error: use of undeclared identifier 'wage'
+```cpp
+double wage;
+double salary = wage = 9999.99;
+```
+
+(d): ok: but value will be truncated.
+```cpp
+double i = 3.14;
+```
+
+## Exercise 2.10
+>What are the initial values, if any, of each of the following variables?
+```cpp
+std::string global_str;
+int global_int;
+int main()
+{
+    int local_int;
+    std::string local_str;
+}
+```
+`global_str` is global variable, so the value is empty string.
+`global_int` is global variable, so the value is zero.
+`local_int` is a local variable which is uninitialized, so it has a undefined value.
+`local_str` is also a local variable which is uninitialized, but it has a value that is defined by the class. So it is empty string.
+PS: please read P44 in the English version, P40 in Chinese version to get more.
+The note: Uninitialized objects of built-in type defined inside a function body have a undefined value. Objects of class type that we do not explicitly inititalize have a value that is defined by class.
+
+## Exercise 2.11
+> Explain whether each of the following is a declaration or a
+definition:
+- (a) extern int ix = 1024;
+- (b) int iy;
+- (c) extern int iz;
+
+    (a): definition.
+    (b): definition.
+    (c): declaration.
+
+## Exercise 2.12
+>Which, if any, of the following names are invalid?
+- (a) int double = 3.14;
+- (b) int _;
+- (c) int catch-22;
+- (d) int 1_or_2 = 1;
+- (e) double Double = 3.14;
+
+`a`, `c`, `d` are invalid.
+
+## Exercise 2.13
+>What is the value of j in the following program?
+```cpp
+int i = 42;
+int main()
+{
+    int i = 100;
+    int j = i;
+}
+```
+
+`100`, since the global `i` was hidden by the local `i`.
