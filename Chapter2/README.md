@@ -28,7 +28,7 @@ std::cout << u - i << std::endl;
 Output:
 ```
 32
-4294967264
+4294967264 // = (-32 + 4294967295) mod 4294967295
 32
 -32
 0
@@ -36,4 +36,13 @@ Output:
 ```
 ## Exercise 2.4
 > Write a program to check whether your predictions were correct. If not, study this section until you understand what the problem is.
+
 [code](exercise2_4.cpp)
+
+## Exercise 2.5
+> Determine the type of each of the following literals. Explain
+the differences among the literals in each of the four examples:
+- (a) 'a', L'a', "a", L"a"
+- (b) 10, 10u, 10L, 10uL, 012, 0xC
+- (c) 3.14, 3.14f, 3.14L
+- (d) 10, 10u, 10., 10e-2
