@@ -309,3 +309,75 @@ if (*p) // ...
 ```
 if (p) // whether p is nullptr
 if(*p) // whether the value pointed by p is zero
+
+## Exercise 2.23
+>Given a pointer p, can you determine whether p points to a valid object? If so, how? If not, why not?
+
+NO, more information needed. type/intialization/...
+
+
+## Exercise 2.24
+>Why is the initialization of p legal but that of lp illegal?
+
+```cpp
+int i = 42;
+void *p = &i;
+long *lp = &i;
+```
+In a word, the types of pointer are different.
+
+Inherited from C, `void*` is a special pointer that may point to any type, hence the second line is legal.
+
+For type safety, C++ forbids implicit conversions like `long *lp = &i;`, thus such code is illegal.
+
+## Exercise 2.25
+>Determine the types and values of each of the following
+variables.
+- (a) int* ip, i, &r = i;
+- (b) int i, *ip = 0;
+- (c) int* ip, ip2;
+
+(a) ip is a pointer to int, i is an int, r is a reference to int i
+(b) i is an int, ip is a valid, null pointer
+(c) ip is a pointer to int, ip2 is an int.
+
+## Exercise 2.26
+>Which of the following are legal? For those that are illegal,
+explain why.
+
+```cpp
+const int buf;      // illegal, buf is uninitialized const.
+int cnt = 0;        // legal.
+const int sz = cnt; // legal.
+++cnt;              // legal.
+++sz;               // illegal, attempt to write to const object(sz).
+```
+
+## Note:
+ 若在多个文件之间共享const object, 必须在变量的定义之前添加external 关键字
+
+//file_1.cc
+extern const int bufSize = fcn();
+
+//file_1.h
+extern const bufSize;
+
+## Exercise 2.27
+> Which of the following initializations are legal? Explain why.
+
+```cpp
+int i = -1, &r = 0;         // illegal, r must refer to an object.
+int *const p2 = &i2;        // legal.
+const int i = -1, &r = 0;   // legal.
+const int *const p3 = &i2;  // legal.
+const int *p1 = &i2;        // legal
+const int &const r2;        // illegal, r2 is a reference that cannot be const.
+const int i2 = i, &r = i;   // legal.
+```
+>Note: As for why `const int i = -1, &r = 0; ` is `legal` and  `int i = -1, &r = 0;   ` is 'illegal' [Answer](https://stackoverflow.com/questions/34525109/why-int-r-0-is-illegal-while-const-int-r-0-is-legal)
+
+A non-const lvalue reference must bind directly to an lvalue. `0` is not an lvalue, so `int &r = 0;` fails.
+
+A const lvalue reference may be bound to an rvalue. When this happens, it is not bound directly. Instead, a temporary (of type `const int` here) is created and copy-initialized from the rvalue. The temporary has its lifetime extended by virtue of this binding.
+
+So `const int &r = 0;` is legal and has a similar effect to `const int __temp = 0; const int &r = __temp;`
