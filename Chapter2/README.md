@@ -198,3 +198,114 @@ Legal. Output:
 ```100 45```
 
 Note: in for scope, i = 0, break when i = 10;
+
+## Exercise 2.15
+>Which of the following definitions, if any, are invalid? Why?
+- (a) int ival = 1.01;
+- (b) int &rval1 = 1.01;
+- (c) int &rval2 = ival;
+- (d) int &rval3;
+
+```
+(a) valid
+(b) invalid, intializaer must be an object.
+(c) valid
+(d) invalid. a reference must be intialized.
+```
+
+## Exercise 2.16
+>Which, if any, of the following assignments are invalid? If they are valid, explain what they do.
+
+    int i = 0, &r1 = i; double d = 0, &r2 = d;
+- (a) r2 = 3.14159;
+- (b) r2 = r1;
+- (c) i = r2;
+- (d) r1 = d;
+
+```
+(a): valid, let d = 3.14159
+(b): valid, automatic convert will happen.
+(c): valid, but value will be truncated.
+(d): valid, but value will be truncated.
+```
+## Exercise 2.17
+>What does the following code print?
+```cpp
+int i, &ri = i;
+i = 5; ri = 10;
+std::cout << i << " " << ri << std::endl;
+```
+
+```
+10 10
+```
+
+## Exercise 2.18
+>Write code to change the value of a pointer. Write code to
+change the value to which the pointer points.
+
+```cpp
+int a = 0, b = 1;
+int *p1 = &a, *p2 = p1;
+
+// change the value of a pointer.
+p1 = &b;
+// change the value to which the pointer points
+*p2 = b;
+
+```
+
+## Exercise 2.19
+>Explain the key differences between pointers and references.
+
+#### definition:
+
+the pointer is "points to" any other type.
+
+the reference is "another name" of an **object**.
+
+#### key difference:
+
+1. a reference is another name of an **already existing** object.
+a pointer is an object in its **own right**.
+2. Once initialized, a reference remains **bound to** its initial object.
+There is **no way** to rebind a reference to refer to a different object.
+a pointer can be **assigned** and **copied**.
+3. a reference always get the object to which the reference was initially bound.
+a single pointer can point to **several different objects** over its lifetime.
+4. a reference must be initialized.
+a pointer need **not be** initialized at the time it is defined.
+
+
+## Exercise 2.20
+>What does the following program do?
+```cpp
+int i = 42;
+int *p1 = &i; *p1 = *p1 * *p1;
+```
+
+`p1` pointer to `i`, `i`'s value changed to 1764(42*42)
+
+## Exercise 2.21
+>Explain each of the following definitions. Indicate whether any are illegal and, if so, why.
+
+    int i = 0;
+
+- (a) double* dp = &i;
+- (b) int *ip = i;
+- (c) int *p = &i;
+
+```
+(a): illegal, cannot initialize a variable of type `double *` with an rvalue of type `int *` 
+(b): illegal, cannot initialize a variable of type `int *` with an lvalue of type `int`
+(c): legal
+```
+
+## Exercise 2.22
+Assuming p is a pointer to int, explain the following code:
+```cpp
+if (p) // ...
+if (*p) // ...
+```
+if (p) // whether p is nullptr
+if(*p) // whether the value pointed by p is zero
