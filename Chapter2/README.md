@@ -423,6 +423,49 @@ error: cannot initialize a variable of type 'int *' with an lvalue of type 'cons
 1 error generated.
 ```
 
+### Note
+底层const（low-level const）表示其指向（所引用）的对象是const的。 
+顶层const（top-level const）表示本身是const的，不可变
 ## Exercise 2.30
->For each of the following declarations indicate whether the
-object being declared has top-level or low-level const.
+>For each of the following declarations indicate whether the object being declared has top-level or low-level const.
+```cpp
+const int v2 = 0; int v1 = v2;
+int *p1 = &v1, &r1 = v1;
+const int *p2 = &v2, *const p3 = &i, &r2 = v2;
+```
+
+```cpp
+v2 is top-level const;
+
+p2 is low-level;
+
+p3 is top-level(cannot change) & low-level(the object pointed to cannot change) 
+
+r2 is low-level;
+```
+
+## Exercise 2.31
+>Given the declarations in the previous exercise determine whether the following assignments are legal. Explain how the top-level or low-level const applies in each case.
+
+```cpp
+r1 = v2;    // legal. top-level const in v2 is ignored
+p1 = p2;    // illegal. p2 has a low-level conten but p1 not
+p2 = p1;    // legal.  int * can be converted to const int *
+p1 = p3;    // illegal. don not have the same level const
+p2 =p3;     //legal. p2 has the same level const qualification as p3 
+```
+
+## Exercise 2.32
+>Is the following code legal or not? If not, how might you make it legal?
+
+    int null = 0, *p = null;
+
+illegal. 
+```cpp
+int null = 0, *p = &null;
+//or
+int null = 0, *p = nullptr;
+```
+
+## Exercise 2.33
+>Using the variable definitions from this section, determine what happens in each of these assignment

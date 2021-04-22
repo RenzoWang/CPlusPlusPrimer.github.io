@@ -2,9 +2,16 @@
 
 int main()
 {
-    int i = 100, sum = 0;
-    for (int i = 0; i!=10;++i)
-        sum += i;
-    std::cout<< i <<" "<< sum << std::endl;
+    const int i = 0;
+    const int j =6;
+    int 
+    const int * p1 = &i;
+    const int *p2 = &j;
+    int *const p3 = &j;
+    std::cout<< i <<" "<< *p1 << std::endl;
+    std::cout << &p1 << std::endl;
+    i = j ;
+    std::cout<< i <<" "<< *p1 << std::endl;
+    std::cout << &p1 << std::endl;
     return 0;
 }
