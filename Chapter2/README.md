@@ -368,7 +368,7 @@ extern const bufSize;
 ```cpp
 int i = -1, &r = 0;         // illegal, r must refer to an object.
 int *const p2 = &i2;        // legal.
-const int i = -1, &r = 0;   // legal.
+const int i = -1, &r = 0;   // legal. there is a hide line `const int __temp = 0; const int &r = __temp;`
 const int *const p3 = &i2;  // legal.
 const int *p1 = &i2;        // legal
 const int &const r2;        // illegal, r2 is a reference that cannot be const.
@@ -381,3 +381,48 @@ A non-const lvalue reference must bind directly to an lvalue. `0` is not an lval
 A const lvalue reference may be bound to an rvalue. When this happens, it is not bound directly. Instead, a temporary (of type `const int` here) is created and copy-initialized from the rvalue. The temporary has its lifetime extended by virtue of this binding.
 
 So `const int &r = 0;` is legal and has a similar effect to `const int __temp = 0; const int &r = __temp;`
+
+ > About lvalue & rvalue etc. [Here](https://zhuanlan.zhihu.com/p/138210501). And the difference about const reference and reference [Here](https://blog.csdn.net/sinat_38104725/article/details/100057974)
+ 
+## Exercise 2.28
+
+>Explain the following definitions. Identify any that are illegal.
+
+```cpp
+int i, *const cp;       // illegal. const pointer cp must be initialized
+int *p1, *const p2;     // illegal. const pointer p2 must be initialized
+const int ic, &r = ic;  // illegal. reference ic must be initialized
+const int *const p3;    // illegal. const pointer p3 must be initialized
+const int *p;           // legale. a pointer to const int
+```
+
+## Exercise 2.29
+>Uing the variables in the previous exercise, which of the following assignments are legal? Explain why.
+```cpp
+i = ic;     // legal. 
+p1 = p3;    // illegal. const pinter p3 to const int. int pointer cannot point to const value.
+p1 = &ic;   // illegal. ic is a const int, normal pointer cannot point to const int.
+p3 = &ic;   // illegal. p3 is a const pointer. cannot  change value 
+p2 = p1;    // illegal. p2 is a const pointer. cannot change value.
+ic = *p3;   // illegal. ic is const int. cannot change value.
+```
+
+>普通指针不能指向 const 变量。
+```cpp
+int a = 10;
+const int *p = &a;
+
+int *r = p;
+std::cout << *r << std::endl;
+```
+Error:
+```cpp
+error: cannot initialize a variable of type 'int *' with an lvalue of type 'const int *'
+    int *r = p;
+         ^   ~
+1 error generated.
+```
+
+## Exercise 2.30
+>For each of the following declarations indicate whether the
+object being declared has top-level or low-level const.
