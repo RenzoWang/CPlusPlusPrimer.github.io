@@ -511,5 +511,307 @@ whether your predictions in the previous exercise were correct.
 If not, study the examples until you can convince yourself you know
 ￼￼what led you to the wrong conclusion.
 
-[Here](/exercise2_34.cc) is the code.
+[Here](/Chapter2/exercise2_34.cc) is the code.
 
+## Exercise 2.35
+>Determine the types deduced in each of the following definitions. Once you’ve figured out the types, write a program to see whether you were correct.
+
+```cpp
+const int i = 42;   // i is a const int
+auto j = i;         // j is an int
+const auto &k = i;  // k is a const int *
+auto *p = &i;       // p is a const int pointer
+const auto j2 = i, &k2 = i; //j2 is a const int, k2 is a const int reference.
+```
+[Code](/Chapter2/exercise2_35.cc) example
+```
+// print i means int, and PKi means pointer to const int.
+j is i
+k is i
+p is PKi
+j2 is i
+k2 is i
+```
+## Exercise 2.36
+>In the following code, determine the type of each variable and the value each variable has when the code finishes:
+```cpp
+int a = 3, b = 4;
+decltype(a) c = a;
+decltype((b)) d = a;
+++c;
+++d;
+```
+
+`c` is an int.
+`b` is a reference of `a`.
+all their value is `4`
+
+## Exercise 2.37
+>Assignment is an example of an expression that yields a reference type. The type is a reference to the type of the left-hand operand. That is, if i is an int, then the type of the expression i = x is int&. Using that knowledge, determine the type and value of each variable in this code:
+```cpp
+int a = 3, b = 4;
+decltype(a) c = a;
+decltype(a = b) d = a;
+```
+`c` is an int.
+
+`d` is a reference of int.
+
+value a =3; b = 4, c = 3, d = 3.
+## Exercise 2.38
+>Describe the differences in type deduction between decltype and auto. Give an example of an expression where auto and decltype will deduce the same type and an example where they will deduce differing types.
+
+The way `decltype` handles top-level const and references differs **subtly** from the way `auto` does.
+Another important difference between `decltype` and `auto` is that the deduction done by decltype depends on the **form** of its given expression.
+
+so the key of difference is **subtly** and **form**.
+
+```cpp
+int i = 0, &r = i;
+//相同
+auto a = i;
+decltype(i) b = i;
+
+//不同 d 是一个 int&
+auto c = r;
+decltype(r) d = r;
+```
+More? Look at [here](http://stackoverflow.com/questions/21369113/what-is-the-difference-between-auto-and-decltypeauto-when-returning-from-a-fun) and [here](http://stackoverflow.com/questions/12084040/decltype-vs-auto)
+
+## Exercise 2.39
+>Compile the following program to see what happens when
+you forget the semicolon after a class definition. Remember the message for
+future reference.
+```cpp
+struct Foo { /* empty  */ } // Note: no semicolon
+int main()
+{
+    return 0;
+}
+```
+> Error message: [Error] expected ';' after struct definition
+
+## Exercise 2.40
+>Write your own version of the Sales_data class.
+```cpp
+struct Sale_data
+{
+    std::string bookNo;
+    std::string bookName;
+    unsigned unuts_sold = 0;
+    double revenue = 0.0;
+    double price = 0.0;
+    //...
+
+};
+```
+## Exercise 2.41
+>Use your Sales_data class to rewrite the exercises in § 1.5.1(p. 22), § 1.5.2(p. 24), and § 1.6(p. 25). For now, you should define your Sales_data class in the same file as your main function.
+####1.5.1
+```cpp
+#include <iostream>
+#include <string>
+
+struct Sale_data
+{
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+};
+
+int main()
+{
+    Sale_data book;
+    double price;
+    std::cin >> book.bookNo >> book.units_sold >> price;
+    book.revenue = book.units_sold * price;
+    std::cout << book.bookNo << " " << book.units_sold << " " << book.revenue << " " << price;
+
+    return 0;
+}
+```
+####1.5.2
+
+```cpp
+#include <iostream>
+#include <string>
+
+struct Sale_data
+{
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+};
+
+int main()
+{
+    Sale_data book1, book2;
+    double price1, price2;
+    std::cin >> book1.bookNo >> book1.units_sold >> price1;
+    std::cin >> book2.bookNo >> book2.units_sold >> price2;
+    book1.revenue = book1.units_sold * price1;
+    book2.revenue = book2.units_sold * price2;
+
+    if (book1.bookNo == book2.bookNo)
+    {
+        unsigned totalCnt = book1.units_sold + book2.units_sold;
+        double totalRevenue = book1.revenue + book2.revenue;
+        std::cout << book1.bookNo << " " << totalCnt << " " << totalRevenue << " ";
+        if (totalCnt != 0)
+            std::cout << totalRevenue / totalCnt << std::endl;
+        else
+            std::cout << "(no sales)" << std::endl;
+        return 0;
+    }
+    else
+    {
+        std::cerr << "Data must refer to same ISBN" << std::endl;
+        return -1;  // indicate failure
+    }
+}
+```
+####1.6
+
+```cpp
+#include <iostream>
+#include <string>
+
+struct Sale_data
+{
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+};
+
+int main()
+{
+    Sale_data total;
+    double totalPrice;
+    if (std::cin >> total.bookNo >> total.units_sold >> totalPrice)
+    {
+        total.revenue = total.units_sold * totalPrice;
+
+        Sale_data trans;
+        double transPrice;
+        while (std::cin >> trans.bookNo >> trans.units_sold >> transPrice)
+        {
+            trans.revenue = trans.units_sold * transPrice;
+
+            if (total.bookNo == trans.bookNo)
+            {
+                total.units_sold += trans.units_sold;
+                total.revenue += trans.revenue;
+            }
+            else
+            {
+                std::cout << total.bookNo << " " << total.units_sold << " " << total.revenue << " ";
+                if (total.units_sold != 0)
+                    std::cout << total.revenue / total.units_sold << std::endl;
+                else
+                    std::cout << "(no sales)" << std::endl;
+
+                total.bookNo = trans.bookNo;
+                total.units_sold = trans.units_sold;
+                total.revenue = trans.revenue;
+            }
+        }
+
+        std::cout << total.bookNo << " " << total.units_sold << " " << total.revenue << " ";
+        if (total.units_sold != 0)
+            std::cout << total.revenue / total.units_sold << std::endl;
+        else
+            std::cout << "(no sales)" << std::endl;
+
+        return 0;
+    }
+    else
+    {
+        std::cerr << "No data?!" << std::endl;
+        return -1;  // indicate failure
+    }
+}
+```
+## Exercise 2.42
+>Write your own version of the Sales_data.h header and use it to rewrite the exercise from § 2.6.2(p. 76)
+####1.5.1
+```cpp
+#include <iostream>
+#include "ex2_42.h"
+
+int main()
+{
+    Sales_data book;
+    double price;
+    std::cin >> book.bookNo >> book.units_sold >> price;
+    book.CalcRevenue(price);
+    book.Print();
+
+    return 0;
+}
+```
+####1.5.2
+```cpp
+#include <iostream>
+#include "ex2_42.h"
+
+int main()
+{
+    Sales_data book1, book2;
+    double price1, price2;
+    std::cin >> book1.bookNo >> book1.units_sold >> price1;
+    std::cin >> book2.bookNo >> book2.units_sold >> price2;
+    book1.CalcRevenue(price1);
+    book2.CalcRevenue(price2);
+
+    if (book1.bookNo == book2.bookNo)
+    {
+        book1.AddData(book2);
+        book1.Print();
+        return 0;
+    }
+    else
+    {
+        std::cerr << "Data must refer to same ISBN" << std::endl;
+        return -1;  // indicate failure
+    }
+}
+
+```
+
+####1.6
+```cpp
+#include <iostream>
+#include "ex2_42.h"
+
+int main()
+{
+    Sales_data total;
+    double totalPrice;
+    if (std::cin >> total.bookNo >> total.units_sold >> totalPrice)
+    {
+        total.CalcRevenue(totalPrice);
+        Sales_data trans;
+        double transPrice;
+        while (std::cin >> trans.bookNo >> trans.units_sold >> transPrice)
+        {
+            trans.CalcRevenue(transPrice);
+            if (total.bookNo == trans.bookNo)
+            {
+                total.AddData(trans);
+            }
+            else
+            {
+                total.Print();
+                total.SetData(trans);
+            }
+        }
+        total.Print();
+        return 0;
+    }
+    else
+    {
+        std::cerr << "No data?!" << std::endl;
+        return -1;  // indicate failure
+    }
+}
+```
