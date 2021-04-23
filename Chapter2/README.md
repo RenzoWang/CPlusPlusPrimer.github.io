@@ -431,6 +431,7 @@ assignment of read-only variable 'ic'
         ^
 */
 ```
+Test code is [here](/Chapter2/exercise2_29.cc)
 
 >普通指针不能指向 const 变量。
 ```cpp
@@ -510,5 +511,5 @@ whether your predictions in the previous exercise were correct.
 If not, study the examples until you can convince yourself you know
 ￼￼what led you to the wrong conclusion.
 
-[Here](/Chapter2/exercise2——34.cc) is the code.
+[Here](/exercise2_34.cc) is the code.
 
