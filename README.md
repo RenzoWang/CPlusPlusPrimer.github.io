@@ -7,6 +7,6 @@ C++Primer Code Practice
 
 ## Chapter2
 This chapter is almost defination and explaination. 
-[Finished] (/Chapter2) 
+[Finished](/Chapter2) 
 ## Chapter3
 
