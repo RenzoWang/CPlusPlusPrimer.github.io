@@ -391,7 +391,7 @@ So `const int &r = 0;` is legal and has a similar effect to `const int __temp = 
 ```cpp
 int i, *const cp;       // illegal. const pointer cp must be initialized
 int *p1, *const p2;     // illegal. const pointer p2 must be initialized
-const int ic, &r = ic;  // illegal. reference ic must be initialized
+const int ic, &r = ic;  // illegal. const int ic must be initialized
 const int *const p3;    // illegal. const pointer p3 must be initialized
 const int *p;           // legale. a pointer to const int
 ```
@@ -400,11 +400,36 @@ const int *p;           // legale. a pointer to const int
 >Uing the variables in the previous exercise, which of the following assignments are legal? Explain why.
 ```cpp
 i = ic;     // legal. 
-p1 = p3;    // illegal. const pinter p3 to const int. int pointer cannot point to const value.
+p1 = p3;    // illegal. const pinter p3 to const int. int pointer cannot point to const value. 
+/* 
+error: invalid conversion from 'const int*' to 'int*' [-fpermissive]
+     p1 = p3;
+        ^
+*/
 p1 = &ic;   // illegal. ic is a const int, normal pointer cannot point to const int.
+/*
+error: invalid conversion from 'const int*' to 'int*' [-fpermissive]
+     p1 = &ic;
+        ^
+*/
 p3 = &ic;   // illegal. p3 is a const pointer. cannot  change value 
+/*
+error: assignment of read-only variable 'p3'
+     p3 = &ic;
+        ^
+*/
 p2 = p1;    // illegal. p2 is a const pointer. cannot change value.
+/*
+error: assignment of read-only variable 'p2'
+     p2 = p1;
+        ^
+*/
 ic = *p3;   // illegal. ic is const int. cannot change value.
+/*
+assignment of read-only variable 'ic'
+     ic =*p3;
+        ^
+*/
 ```
 
 >普通指针不能指向 const 变量。
@@ -452,7 +477,7 @@ r1 = v2;    // legal. top-level const in v2 is ignored
 p1 = p2;    // illegal. p2 has a low-level conten but p1 not
 p2 = p1;    // legal.  int * can be converted to const int *
 p1 = p3;    // illegal. don not have the same level const
-p2 =p3;     //legal. p2 has the same level const qualification as p3 
+p2 =p3;     // legal. p2 has the same level const qualification as p3 
 ```
 
 ## Exercise 2.32
@@ -469,3 +494,21 @@ int null = 0, *p = nullptr;
 
 ## Exercise 2.33
 >Using the variable definitions from this section, determine what happens in each of these assignment
+```cpp
+a=42;   // set 42 to int a
+b=42;   // set 42 to int b
+c=42;   // set 42 to int c
+d=42;   // illegal. d is a int pointer. *d = 42 is correct
+e=42;   // illegal. e is a const int*. e = &c is correct.
+g=42;   // illegal. g is reference bound to const int ci.
+```
+## Exercise 2.34
+>Write a program containing the variables and assignments from the
+previous exercise.
+Print the variables before and after the assignments to check
+whether your predictions in the previous exercise were correct.
+If not, study the examples until you can convince yourself you know
+￼￼what led you to the wrong conclusion.
+
+[Here](/Chapter2/exercise2——34.cc) is the code.
+
