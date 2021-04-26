@@ -17,8 +17,8 @@ use `double`, or also `float`.
 > What output will the following code produce?
 ```cpp
 unsigned u = 10, u2 = 42;
-std::cout << u2 - u << std::endl;
-std::cout << u - u2 << std::endl;
+std::cout << u2 - u << std::endl;   // 42-10 = 32
+std::cout << u - u2 << std::endl;   // 10 - 42 = -32 mod 
 int i = 10, i2 = 42;
 std::cout << i2 - i << std::endl;
 std::cout << i - i2 << std::endl;
@@ -151,8 +151,7 @@ PS: please read P44 in the English version, P40 in Chinese version to get more.
 The note: Uninitialized objects of built-in type defined inside a function body have a undefined value. Objects of class type that we do not explicitly inititalize have a value that is defined by class.
 
 ## Exercise 2.11
-> Explain whether each of the following is a declaration or a
-definition:
+> Explain whether each of the following is a declaration or a definition:
 - (a) extern int ix = 1024;
 - (b) int iy;
 - (c) extern int iz;
@@ -241,8 +240,7 @@ std::cout << i << " " << ri << std::endl;
 ```
 
 ## Exercise 2.18
->Write code to change the value of a pointer. Write code to
-change the value to which the pointer points.
+>Write code to change the va lue of a pointer. Write code to change the value to which the pointer points.
 
 ```cpp
 int a = 0, b = 1;
