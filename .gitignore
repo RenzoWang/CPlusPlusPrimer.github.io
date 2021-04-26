@@ -1,10 +1,10 @@
 Chapter1/chapter1.exe
 .vscode/settings.json
 .vscode/c_cpp_properties.json
-Chapter2/Chapter2.exe
+
 .vscode/launch.json
-Chapter2/exercise2_29.exe
-Chapter2/exercise2_34.exe
-Chapter2/exercise2_35.exe
-Chapter3/ex3_1b.exe
-Chapter3/ex3_1a.exe
+Chapter2/*.exe
+Chapter3/*.exe
+Chapter4/*.exe
+Chapter5/*.exe
+.vscode/tasks.json
