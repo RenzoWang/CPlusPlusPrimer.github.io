@@ -107,3 +107,15 @@ The 1st one is better.
 [part2](/Chapter3/ex3_20b.cc)
 ## [Exercise 3.21](/Chapter3/ex3_21.cc)
 >Redo the first exercise from § 3.3.3 (p. 105) using iterators.
+
+## [Exercise 3.22](/Chapter3/ex3_22.cc)
+>Revise the loop that printed the first paragraph in text to instead change the elements in text that correspond to the first paragraph to all uppercase. After you’ve updated text, print its contents.
+
+## [Exercise 3.23](/Chapter3/ex3_23.cc)
+>Write a program to create a vector with ten int elements. Using an iterator, assign each element a value that is twice its current value. Test your program by printing the vector.
+## [Exercise 3.24](/Chapter3/ex3_24.cc)
+>Redo the last exercise from § 3.3.3 (p. 105) using iterators.
+## [Exercise 3.25](/Chapter3/ex3_25.cc)
+## Exercise 3.26
+>In the binary search program on page 112, why did we write `mid=beg+(end-beg)/2;` instead of `mid=(beg+end) /2;`?
+There is no operator `+` for adding 2 iterators.

@@ -42,3 +42,6 @@ Use the subscript operator `[ ]`, indicate the position of the accessed characte
 
 ## 标准库类型 vector
 **类模版**(class template)
+
+### 迭代器 iteratot
+如果是使用了迭代器的循环体，不要向迭代器所属的容器添加元素，该操作会使vector对象的迭代器失效
