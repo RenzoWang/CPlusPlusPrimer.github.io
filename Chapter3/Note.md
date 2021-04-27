@@ -39,3 +39,6 @@ cout << c << endl;
 ### 处理一部分字符
 Use the subscript operator `[ ]`, indicate the position of the accessed character, and the return value is a reference to the character at that position. 
 > From zero(0)
+
+## 标准库类型 vector
+**类模版**(class template)
