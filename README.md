@@ -1,12 +1,12 @@
 # CPlusPlusPrimer.github.io
-C++Primer Code Practice
+C++Primer Practice
 
-- These codes and notes may have some errors because of the limitation of my knowladge.
+- These codes and notes may have some errors because of the limitation of my knowladge. If have any mistake or bug, please feel free to create an issue or [e-mail](renzowang05@gmail.com) to me.
 
-- Another cpp-primer reference: [Cpp-primer](https://github.com/Mooophy/Cpp-Primer). 
+- Reference: [Cpp-primer](https://github.com/Mooophy/Cpp-Primer). 
 
 ### Chapter1 
-[Finished](/Chapter1/chapter1.cc) 
+[code](/Chapter1/chapter1.cc) 
 >All code in one file. And the name of the function is the exercises.
 
 ## - Part I: The Basics
@@ -16,8 +16,11 @@ This chapter is almost defination and explaination.
 ### [Chapter3. Strings, Vectors, and Arrays](/Chapter3)
 
 ### [Chapter4. Expressions](/Chapter4)
+[Notes](/Chapter4/CH4_Notes.md)
 ### [Chapter 5. Statements](/Chapter5)
+[Notes](/Chapter5/Notes.md)
 ### [Chapter 6. Functions](/Chapter6)
+[Notes](/Chapter5/Notes.md)
 ### [Chapter 7. Classes](/Chapter7)
 
 ## Part II: The C++ Library

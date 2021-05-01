@@ -1,10 +1,22 @@
 #include <iostream>
+#include <vector>
+
+using std::cout; using std::vector;
+
+bool is_prefix(vector<int> const& lhs, vector<int> const& rhs)
+{
+    if(lhs.size() > rhs.size())
+        return is_prefix(rhs, lhs);
+    for(unsigned i = 0; i != lhs.size(); ++i)
+        if(lhs[i] != rhs[i]) return false;
+    return true;
+}
+
 int main()
 {
-    int sum = 0, val = 1;
-    while (val <= 10)
-        sum += val, ++val;
-    std::cout << "Sum of 1 to 10 inclusive is " << sum << std::endl;
+    vector<int> l{ 0, 1, 1, 2 };
+    vector<int> r{ 0, 1, 1, 2, 3, 5, 8 };
+    cout << (is_prefix(r, l) ? "yes\n" : "no\n");
 
     return 0;
 }
