@@ -6,4 +6,8 @@ Chapter2/*.exe
 Chapter3/*.exe
 Chapter4/*.exe   
 Chapter5/*.exe
+Chapter6/*.exe
+Chapter7/*.exe
 .vscode/tasks.json 
+Chapter6/tempCodeRunnerFile.cc
+Chapter6/tempCodeRunnerFile.cpp

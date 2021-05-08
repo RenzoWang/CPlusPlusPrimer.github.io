@@ -450,6 +450,8 @@ error: cannot initialize a variable of type 'int *' with an lvalue of type 'cons
 ### Note
 底层const（low-level const）表示其指向（所引用）的对象是const的。 
 顶层const（top-level const）表示本身是const的，不可变
+`*const`代表的是顶层const，指针存的地址不能改变。
+`const int`代表的是底层const，指针指向一个常量，常量自然不能改变。
 ## Exercise 2.30
 >For each of the following declarations indicate whether the object being declared has top-level or low-level const.
 ```cpp
