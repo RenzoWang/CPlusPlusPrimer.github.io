@@ -30,7 +30,7 @@ putting `cin` in an error state to terminate. such as `failbit`, `eofbit` and `b
 
 ## [Exercise 8.6](ex8_06.cpp)
 >重写7.1.1节的书店程序，从一个文件中读取交易记录。将文件名作为一个参数传递给main。
-
+即使用main处理命令行选项
 ## [Exercise 8.7](ex8_07.cpp)
 >修改上一节的书店程序，将结果保存到一个文件中。将输出文件名作为第二个参数传递给main函数。
 
@@ -40,6 +40,7 @@ putting `cin` in an error state to terminate. such as `failbit`, `eofbit` and `b
 ## [Exercise 8.9](ex8_09.cpp)
 >使用你为8.1.2节第一个练习所编写的函数打印一个istringstream对象的内容。
 
+>Use the function you wrote for the first exercise in § 8.1.2 (p.314) to print the contents of an istringstream object.
 ## [Exercise 8.10](ex8_10.cpp)
 >编写程序，将来自一个文件中的行保存在一个vector中。然后使用一个istringstream从vector读取数据元素，每次读取一个单词。
 
@@ -49,8 +50,15 @@ putting `cin` in an error state to terminate. such as `failbit`, `eofbit` and `b
 ## Exercise 8.12:
 >Why didn’t we use in-class initializers in PersonInfo?
 
+Here is a aggregate class. So it should have no in-class initializers.
 ## [Exercise 8.13](ex8_13.cpp)
 >重写本节的电话号码程序，从一个命名文件而非cin读取数据。
 
+[another version](ex8_13b.cpp)
+
 ## Exercise 8.14:
 >Why did we declare entry and nums as const auto &?
+
+cause they are all class type, not the built-in type. so reference more effective.
+
+output shouldn't change their values. so we added the `const`.

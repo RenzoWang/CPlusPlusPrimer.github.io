@@ -13,7 +13,7 @@ void readFileToVec(const string& filename, vector<string>& vec)
     if(ifile)
     {
         string str;
-        while(ifile >> str)
+        while(ifile >> str) //从文件中读入数据类似于cin >>
             vec.push_back(str);
     }
 }

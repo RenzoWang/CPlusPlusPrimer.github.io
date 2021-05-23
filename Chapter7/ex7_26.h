@@ -1,5 +1,5 @@
-#ifndef CP5_ex7_26_h
-#define CP5_ex7_26_h
+#ifndef CH5_ex7_26_h
+#define CH5_ex7_26_h
 
 #include <string>
 #include <iostream>
@@ -26,8 +26,7 @@ private:
     double revenue = 0.0;
 };
 
-inline
-double Sales_data::avg_price() const
+inline double Sales_data::avg_price() const
 {
     return units_sold ? revenue/units_sold : 0;
 }
@@ -45,7 +44,7 @@ std::istream &read(std::istream &is, Sales_data &item)
 {
 	double price = 0;
 	is >> item.bookNo >> item.units_sold >> price;
-	item.revenue = price * item.units_sold;
+	item.revenue = price * (item.units_sold);
 	return is;
 }
 

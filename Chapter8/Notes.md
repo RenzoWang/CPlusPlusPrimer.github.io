@@ -94,9 +94,19 @@
 
 上表中，`fstream`是头文件`fstream`中定义的一个类型，`fstrm`是一个文件流对象。
 
-- 自动析构和构造
+#### 成员函数open和close 
+如果定义了一个空文件流对象，可以随后调用open来将其与文件关联起来。
+```cpp
+ifstream in(ifile) //构筑一个ifstream并打开相关文件
+ofstream out;       //输出文件流并未与任何文件关联
+out.open(ifile + ".copy") //打开指定文件
+
+```
+
+#### 自动析构和构造
  - 当一个`fstream`对象离开其作用域时，与之关联的文件会自动关闭。
 >当一个`fstream`对象被销毁时，close会自动被调用
+
 ### 8.2.2 文件模式
 
 | 文件模式 | 解释 |
@@ -107,3 +117,45 @@
 | `ate` | 打开文件后立即定位到文件末尾 |
 | `trunc` | 截断文件 |
 | `binary` | 以二进制方式进行IO操作。 |
+
+- 指定文件模式有如下限值
+    * 只可以对`ofstream`或`fstream`对象设定`out`模式
+    * 只可以对`ifstream`或`fstream`对象设定`out`模式
+    * 只有当`out`也被设定时才可以设定`trunc`模式
+    * 只要`trunc`模式没被设定，就可以设定`app`模式，在`app`模式下，即使没有显式指定`out`模式，文件也总是以输出方式打开。
+    * `ate`和`binary`模式适用于任何类型的文件流对象，且可以与任何文件模式组合使用
+    * 默认情况下，即使没有指定`trunc`模式，以`out`模式打开的文件也会被截断。为保留`out`模式打开的文件的内容，必须同时指定`app`模式，这样做只会将数据追加到文件末尾；或同时指定`in`模式，即打开文件同时进行读写操作（参见17.5.3节）
+
+#### 以out模式打开文件会丢弃已有数据（默认情况下）
+
+而阻止一个ofstream清空给定文件内容的方法是同时指定`app`模式。
+
+#### 每次调用open都会确定文件模式
+
+即对于一给定流，每次打开文件时，都可以改变其文件模式
+
+## 8.3 String 流
+
+sstream 头文件定义了三个类型来支持内存IO，这些类型可以向string写入数据，从string读取数据，就像string是一个IO流一样。
+  - `istringstream`从`string`读取数据。
+  - `ostringstream`向`string`写入数据。
+  - `stringstream`可以读写给定`string`。
+
+### stringstream特有的操作
+
+| 操作 | 解释 |
+| ----------- | ----------- |
+|`sstream strm` | 定义一个未绑定的`stringstream`对象 |
+| `sstream strm(s)` | 用`s`初始化对象 |
+| `strm.str()` | 返回`strm`所保存的`string`的拷贝 |
+| `strm.str(s)` | 将`s`拷贝到`strm`中，返回`void` |
+
+上表中`sstream`是头文件`sstream`中任意一个类型。`s`是一个`string`。
+
+### 8.3.1 使用istringstream
+- 当我们的某些工作是对整行文本进行处理，而其他的工作处理行内的单个单词，通常可以使用istringstream。
+
+### 8.3.1 使用ostringstream
+- 当我们逐步构造数据，希望最后一起打印
+
+使用`<<` 向流中写入数据
