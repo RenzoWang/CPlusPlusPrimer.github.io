@@ -2,6 +2,8 @@ Chapter1/chapter1.exe
 .vscode/settings.json
 .vscode/c_cpp_properties.json
 .vscode/launch.json
+test.cc
+*.exe
 Chapter2/*.exe
 Chapter3/*.exe
 Chapter4/*.exe   
@@ -21,5 +23,5 @@ Chapter17/*.exe
 Chapter18/*.exe
 Chapter19/*.exe
 .vscode/tasks.json 
-Chapter6/tempCodeRunnerFile.cc
-Chapter6/tempCodeRunnerFile.cpp
+*/tempCodeRunnerFile.cc
+*/tempCodeRunnerFile.cpp
